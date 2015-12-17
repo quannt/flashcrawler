@@ -9,6 +9,6 @@
   "author": "quannt",
   "license": "ISC",
   "dependencies": {
-        "osmosis": ">=0.1.0 "
-    }
+    "x-ray": "^2.0.2"
+  }
 }
