@@ -5,9 +5,14 @@ var filename = "./result/result.xlsx";
 function processRow(rows){
 
 	var workbook = new Excel.Workbook();
-	var sheet = workbook.addWorksheet("NowGoal");
+	var rule1Sheet = workbook.addWorksheet("NowGoalRule1");
+	var rule2Sheet = workbook.addWorksheet("NowGoalRule2");
+	var rule3Sheet = workbook.addWorksheet("NowGoalRule3");
+	var rule4Sheet = workbook.addWorksheet("NowGoalRule4");
+	var rule5Sheet = workbook.addWorksheet("NowGoalRule5");
+	var rule6Sheet = workbook.addWorksheet("NowGoalRule6");
 
-	sheet.columns = [
+	var headerColumns = [
     { header: "League", key: "League"},
     { header: "Home", key: "Home"},
     { header: "Opening HW", key: "OpeningHW"},
@@ -30,7 +35,12 @@ function processRow(rows){
     { header: "Increased", key: "Increased"}
 	];
 
-
+	rule1Sheet.columns = headerColumns;
+	rule2Sheet.columns = headerColumns;
+	rule3Sheet.columns = headerColumns;
+	rule4Sheet.columns = headerColumns;
+	rule5Sheet.columns = headerColumns;
+	rule6Sheet.columns = headerColumns;
 
 	const firstRowArrayLength = 14;
 	const secondRowArrayLength = 7;
@@ -122,7 +132,7 @@ function processRow(rows){
 		{
 			if ( amountIncreased >= 0.05 )
 			{
-				 writer.addRow(sheet, match, amountIncreased);
+				 writer.addRow(rule1Sheet , match, amountIncreased);
 			} 
 		}
 
@@ -130,15 +140,23 @@ function processRow(rows){
 		{
 			if ( amountIncreased >= 0.10 )
 			{
-				writer.addRow(sheet, match, amountIncreased);
+				writer.addRow(rule2Sheet , match, amountIncreased);
 			} 
 		}
 
-		if (openingValue >= 1.3 && openingValue < 1.5)
+		if (openingValue >= 1.3 && openingValue < 1.4)
 		{
 			if ( amountIncreased >= 0.10 )
 			{
-				 writer.addRow(sheet, match, amountIncreased);
+				 writer.addRow(rule3Sheet , match, amountIncreased);
+			} 
+		}
+
+		if (openingValue >= 1.4 && openingValue < 1.5)
+		{
+			if ( amountIncreased >= 0.10 )
+			{
+				 writer.addRow(rule4Sheet , match, amountIncreased);
 			} 
 		}
 
@@ -146,7 +164,7 @@ function processRow(rows){
 		{
 			if ( amountIncreased >= 0.15 )
 			{
-				writer.addRow(sheet, match, amountIncreased);
+				writer.addRow(rule5Sheet , match, amountIncreased);
 			} 
 		}
 
@@ -154,7 +172,7 @@ function processRow(rows){
 		{
 			if ( amountIncreased >= 0.15 )
 			{
-				writer.addRow(sheet, match, amountIncreased);
+				writer.addRow(rule6Sheet , match, amountIncreased);
 			} 
 		}
 	}
