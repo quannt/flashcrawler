@@ -78,7 +78,7 @@ function processRow(workbook, rows, date){
 		}
 
 		var league = currentRow[0];
-		var matchDate = currentRow[1];
+		var matchDate = cleanDate(currentRow[1]);
 		var homeTeam = currentRow[2];
 		var openingHomeWins = currentRow[3];
 		var openingDraw = currentRow[4];
@@ -193,14 +193,25 @@ function processRow(workbook, rows, date){
 			if ( amountIncreased >= 0.15 )
 			{
 				var worksheet = workbook.getWorksheet("NowGoalRule6");
-				//console.log("before writer.addRow",workbook.getWorksheet("NowGoalRule6").getRow(2).values);
 				writer.addRow(worksheet , match, amountIncreased);
-				//console.log("after writer.addRow",workbook.getWorksheet("NowGoalRule6").getRow(2).values);
 			} 
 		}
 	}
 
 	return workbook;
+};
+
+function cleanDate(date){
+	var newDate = date.replace("showtime(","").replace(")", "").replace("-1", "");
+
+	var newDateArray = newDate.split(',');
+	var newCleanDate = newDate;
+
+	if (newDateArray.length === 6){
+		newCleanDate = newDateArray[2] + "-" + newDateArray[1] + "-" + newDateArray[0];
+	}
+
+	return newCleanDate;
 };
 
 

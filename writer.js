@@ -1,6 +1,5 @@
 function addRow(sheet, match, amountIncreased)
 {
-   //console.log("before sheet.addRow",sheet.getRow(2).values);
    sheet.addRow(
    	{
    		Date : match.date,
@@ -26,7 +25,6 @@ function addRow(sheet, match, amountIncreased)
 		Increased:amountIncreased
    	});
 
-   //console.log("after sheet.addRow",sheet.getRow(2).values);
 
 }
 
