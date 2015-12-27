@@ -12,7 +12,7 @@ function addRow(sheet, match, amountIncreased)
 		OpeningAWR: match.openingAwr,
 		OpeningReturn : match.openingReturnPercentage ,
 		ClosingHW: match.closingHomeWins ,
-		ClosingDR: match.closingDraw,
+		ClosingD: match.closingDraw,
 		ClosingAW: match.closingAwayWins,
 		ClosingHWR: match.closingHwr, 
 		ClosingDR: match.closingDr ,

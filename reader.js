@@ -18,7 +18,7 @@ function processRow(rows){
     { header: "Opening AWR", key: "OpeningAWR"},
     { header: "Opening Return", key: "OpeningReturn"},
     { header: "Closing HW", key: "ClosingHW"},
-    { header: "Closing DR", key: "ClosingDR"},
+    { header: "Closing D", key: "ClosingD"},
     { header: "Closing AW", key: "ClosingAW"},
     { header: "Closing HWR", key: "ClosingHWR"},
     { header: "Closing DR", key: "ClosingDR"},
@@ -30,7 +30,7 @@ function processRow(rows){
     { header: "Increased", key: "Increased"}
 	];
 
-	sheet.addRow({id: 1, name: "John Doe", dob: new Date(1970,1,1)});
+
 
 	const firstRowArrayLength = 14;
 	const secondRowArrayLength = 7;
