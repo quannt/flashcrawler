@@ -2,7 +2,7 @@ var Excel = require("exceljs");
 var writer =require("./writer");
 var filename = "./result/result.xlsx";
 
-function processRow(rows){
+function processRow(rows, date){
 
 	var workbook = new Excel.Workbook();
 	var rule1Sheet = workbook.addWorksheet("NowGoalRule1");
@@ -13,6 +13,7 @@ function processRow(rows){
 	var rule6Sheet = workbook.addWorksheet("NowGoalRule6");
 
 	var headerColumns = [
+	{ header: "Date", key: "Date"},
     { header: "League", key: "League"},
     { header: "Home", key: "Home"},
     { header: "Opening HW", key: "OpeningHW"},
@@ -97,6 +98,7 @@ function processRow(rows){
 		}
 
 		var match = {};
+		match.date = date;
 		match.league = league;
 		match.homeTeam = homeTeam;
 		match.openingHomeWins = openingHomeWins;

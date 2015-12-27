@@ -2,6 +2,7 @@ function addRow(sheet, match, amountIncreased)
 {
    sheet.addRow(
    	{
+   		Date : match.date.format("YYYY-MM-DD"),
    		League: match.league,
 		Home: match.homeTeam,
 		OpeningHW: match.openingHomeWins,
