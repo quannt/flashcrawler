@@ -2,8 +2,8 @@ var Excel = require("exceljs");
 var writer =require("./writer");
 var filename = "./result/result.xlsx";
 
-function processRow(rows, date){
 
+function createNowGoalOutputTemplate(){
 	var workbook = new Excel.Workbook();
 	var rule1Sheet = workbook.addWorksheet("NowGoalRule1");
 	var rule2Sheet = workbook.addWorksheet("NowGoalRule2");
@@ -43,6 +43,18 @@ function processRow(rows, date){
 	rule5Sheet.columns = headerColumns;
 	rule6Sheet.columns = headerColumns;
 
+	return workbook;
+};
+
+function saveNowGoalOutput(workbook){
+	workbook.xlsx.writeFile(filename)
+    .then(function() {
+        console.log("File exported successfully");
+    });
+}
+
+function processRow(workbook, rows, date){
+
 	const firstRowArrayLength = 14;
 	const secondRowArrayLength = 7;
 	var isFirstRow = false;
@@ -66,6 +78,7 @@ function processRow(rows, date){
 		}
 
 		var league = currentRow[0];
+		var matchDate = currentRow[1];
 		var homeTeam = currentRow[2];
 		var openingHomeWins = currentRow[3];
 		var openingDraw = currentRow[4];
@@ -98,7 +111,7 @@ function processRow(rows, date){
 		}
 
 		var match = {};
-		match.date = date;
+		match.date = matchDate;
 		match.league = league;
 		match.homeTeam = homeTeam;
 		match.openingHomeWins = openingHomeWins;
@@ -134,7 +147,8 @@ function processRow(rows, date){
 		{
 			if ( amountIncreased >= 0.05 )
 			{
-				 writer.addRow(rule1Sheet , match, amountIncreased);
+				var worksheet = workbook.getWorksheet("NowGoalRule1");
+				writer.addRow(worksheet , match, amountIncreased);
 			} 
 		}
 
@@ -142,7 +156,8 @@ function processRow(rows, date){
 		{
 			if ( amountIncreased >= 0.10 )
 			{
-				writer.addRow(rule2Sheet , match, amountIncreased);
+				var worksheet = workbook.getWorksheet("NowGoalRule2");
+				writer.addRow(worksheet , match, amountIncreased);
 			} 
 		}
 
@@ -150,7 +165,8 @@ function processRow(rows, date){
 		{
 			if ( amountIncreased >= 0.10 )
 			{
-				 writer.addRow(rule3Sheet , match, amountIncreased);
+				var worksheet = workbook.getWorksheet("NowGoalRule3");
+				writer.addRow(worksheet , match, amountIncreased);
 			} 
 		}
 
@@ -158,7 +174,8 @@ function processRow(rows, date){
 		{
 			if ( amountIncreased >= 0.10 )
 			{
-				 writer.addRow(rule4Sheet , match, amountIncreased);
+				var worksheet = workbook.getWorksheet("NowGoalRule4");
+				writer.addRow(worksheet , match, amountIncreased);
 			} 
 		}
 
@@ -166,7 +183,8 @@ function processRow(rows, date){
 		{
 			if ( amountIncreased >= 0.15 )
 			{
-				writer.addRow(rule5Sheet , match, amountIncreased);
+				var worksheet = workbook.getWorksheet("NowGoalRule5");
+				writer.addRow(worksheet , match, amountIncreased);
 			} 
 		}
 
@@ -174,16 +192,18 @@ function processRow(rows, date){
 		{
 			if ( amountIncreased >= 0.15 )
 			{
-				writer.addRow(rule6Sheet , match, amountIncreased);
+				var worksheet = workbook.getWorksheet("NowGoalRule6");
+				//console.log("before writer.addRow",workbook.getWorksheet("NowGoalRule6").getRow(2).values);
+				writer.addRow(worksheet , match, amountIncreased);
+				//console.log("after writer.addRow",workbook.getWorksheet("NowGoalRule6").getRow(2).values);
 			} 
 		}
 	}
 
-	workbook.xlsx.writeFile(filename)
-    .then(function() {
-        console.log("File exported successfully");
-    });
-}
+	return workbook;
+};
 
 
 exports.processRow = processRow;
+exports.createNowGoalOutputTemplate = createNowGoalOutputTemplate;
+exports.saveNowGoalOutput = saveNowGoalOutput;

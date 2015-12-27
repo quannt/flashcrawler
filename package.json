@@ -9,6 +9,7 @@
   "author": "quannt",
   "license": "ISC",
   "dependencies": {
+    "batch": "^0.5.3",
     "exceljs": "^0.2.3",
     "moment": "^2.10.6",
     "x-ray": "^2.0.2"

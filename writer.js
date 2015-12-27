@@ -1,8 +1,9 @@
 function addRow(sheet, match, amountIncreased)
 {
+   //console.log("before sheet.addRow",sheet.getRow(2).values);
    sheet.addRow(
    	{
-   		Date : match.date.format("YYYY-MM-DD"),
+   		Date : match.date,
    		League: match.league,
 		Home: match.homeTeam,
 		OpeningHW: match.openingHomeWins,
@@ -24,6 +25,8 @@ function addRow(sheet, match, amountIncreased)
 		FT: match.fulleTimeScore,
 		Increased:amountIncreased
    	});
+
+   //console.log("after sheet.addRow",sheet.getRow(2).values);
 
 }
 
