@@ -1,5 +1,8 @@
 var Excel = require("exceljs");
 var writer =require("./writer");
+var saver = require("./saver");
+var helper = require("./helper");
+var moment = require('moment');
 var filename = "./result/result.xlsx";
 
 
@@ -50,11 +53,13 @@ function saveNowGoalOutput(workbook){
 	workbook.xlsx.writeFile(filename)
     .then(function() {
         console.log("File exported successfully");
+        process.exit();
     });
 }
 
 function processRow(workbook, rows, date){
-
+	//helper.sleep(2000);
+	console.log("Processing page at " + moment().format("MMMM Do YYYY, h:mm:ss a"));
 	const firstRowArrayLength = 14;
 	const secondRowArrayLength = 7;
 	var isFirstRow = false;
@@ -197,6 +202,9 @@ function processRow(workbook, rows, date){
 			} 
 		}
 	}
+
+	saver.increaseCounter();
+	saver.save(workbook);
 
 	return workbook;
 };
