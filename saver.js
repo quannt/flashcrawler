@@ -13,7 +13,7 @@ function setGoal(newGoal){
 
 function save(nowGoalWorkbook){
 	console.log("Finished " + finished + " out of " + goal);
-	if (finished >= goal)
+	if (finished == goal)
 	{
 		reader.saveNowGoalOutput(nowGoalWorkbook);
 	}
